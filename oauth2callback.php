@@ -2,6 +2,7 @@
 require_once __DIR__.'/vendor/autoload.php';
 
 session_start();
+echo "LA CONCHA DE TU AUTH MADRE";
 
 $client = new Google_Client();
 $client->setAuthConfigFile('client_secrets.json');
