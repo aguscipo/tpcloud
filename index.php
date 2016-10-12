@@ -11,7 +11,8 @@
       function onSignIn(googleUser) {
         // Useful data for your client-side scripts:
         var profile = googleUser.getBasicProfile();
-        document.getElementById("name").innerText = "Bienvenido " + profile.getName();
+      //  document.getElementById("name").innerText = "Bienvenido " + profile.getName();
+        $('#name').text("Bienvenido " + profile.getName());
         var image = document.createElement("img");
         var imageParent = document.getElementById("body");
         image.id = "profile-image";
