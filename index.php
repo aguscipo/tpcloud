@@ -8,21 +8,18 @@
   <body>
     <div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
     <div id="name"> </div>
-    <script>
-    $('#name').text("Bienvenido ");
-    console.log("HOLA");
-    </script>
+    <div id="imagediv"> </div>
+    <img id="my_image" src="first.jpg"/>
     <script>
       function onSignIn(googleUser) {
         // Useful data for your client-side scripts:
         var profile = googleUser.getBasicProfile();
       //  document.getElementById("name").innerText = "Bienvenido " + profile.getName();
-        $('#name').text("Bienvenido ");
-        var image = document.createElement("img");
-        var imageParent = document.getElementById("body");
-        image.id = "profile-image";
-        image.src = profile.getImageUrl(); // image.src = "IMAGE URL/PATH"
-        imageParent.appendChild(image);
+        $('#name').text("Bienvenido " + profile.getName());
+        var img = $('<img id="dynamic">'); //Equivalent: $(document.createElement('img'))
+        img.attr('src', profile.getImageUrl());
+        img.appendTo('#imagediv');
+
         console.log("ID: " + profile.getId()); // Don't send this directly to your server!
         console.log('Full Name: ' + profile.getName());
         console.log('Given Name: ' + profile.getGivenName());
