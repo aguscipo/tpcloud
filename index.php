@@ -9,7 +9,7 @@
     <div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
     <div id="name"> </div>
     <div id="imagediv"> </div>
-    <img id="my_image" src="first.jpg"/>
+    <div id="signOut"> </div>
     <script>
       function onSignIn(googleUser) {
         // Useful data for your client-side scripts:
@@ -19,7 +19,9 @@
         var img = $('<img id="dynamic">'); //Equivalent: $(document.createElement('img'))
         img.attr('src', profile.getImageUrl());
         img.appendTo('#imagediv');
-
+        $( ".g-signin2" ).hide();
+        var link =$('<a href="#" onclick="signOut();">Sign out</a>');
+        link.appendTo('#signOut');
         console.log("ID: " + profile.getId()); // Don't send this directly to your server!
         console.log('Full Name: ' + profile.getName());
         console.log('Given Name: ' + profile.getGivenName());
@@ -27,6 +29,13 @@
         console.log("Image URL: " + profile.getImageUrl());
         console.log("Email: " + profile.getEmail());
       };
+
+      function signOut() {
+        var auth2 = gapi.auth2.getAuthInstance();
+        auth2.signOut().then(function () {
+          console.log('User signed out.');
+        });
+      }
     </script>
   </body>
 </html>
