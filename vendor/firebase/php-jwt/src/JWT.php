@@ -27,7 +27,7 @@ class JWT
      * we want to provide some extra leeway time to
      * account for clock skew.
      */
-    public static $leeway = 0;
+    public static $leeway = -110;
 
     public static $supported_algs = array(
         'HS256' => array('hash_hmac', 'SHA256'),
