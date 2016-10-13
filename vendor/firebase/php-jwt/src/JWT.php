@@ -27,7 +27,7 @@ class JWT
      * we want to provide some extra leeway time to
      * account for clock skew.
      */
-    public static $leeway = -110;
+    public static $leeway = 0;
 
     public static $supported_algs = array(
         'HS256' => array('hash_hmac', 'SHA256'),
@@ -108,11 +108,7 @@ class JWT
         // Check that this token has been created before 'now'. This prevents
         // using tokens that have been created for later use (and haven't
         // correctly used the nbf claim).
-        if (isset($payload->iat) && $payload->iat > (time() + self::$leeway)) {
-            throw new BeforeValidException(
-                'Cannot handle token prior to ' . date(DateTime::ISO8601, $payload->iat)
-            );
-        }
+
 
         // Check if this token has expired.
         if (isset($payload->exp) && (time() - self::$leeway) >= $payload->exp) {
