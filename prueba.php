@@ -8,6 +8,8 @@ $access_token= $_POST["accesstoken"];
 //json_encode($token);
 //echo($access_token);
 //print_r($access_token);
+error_log($access_token);
+error_log("HOLAAAAA");
 $client->addScope(Google_Service_Drive::DRIVE_METADATA_READONLY);
 if (isset($access_token)){
   $client->setAccessToken($access_token);
