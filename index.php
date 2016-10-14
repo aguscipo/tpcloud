@@ -22,15 +22,18 @@
         $( ".g-signin2" ).hide();
         var link =$('<a href="#" onclick="signOut();">Sign out</a>');
         link.appendTo('#signOut');
-        var id_token = googleUser.getAuthResponse().id_token;
-        console.log("ID TOKEN " + id_token);
+        var access_token = googleUser.getAuthResponse().access_token;
+        console.log(access_token);
+      //  var id_token = googleUser.getAuthResponse().id_token;
+      //  console.log("ID TOKEN " + id_token);
         var xhr = new XMLHttpRequest();
         xhr.open('POST', 'http://tpcloud.com/prueba.php');
         xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
         xhr.onload = function() {
           console.log('Signed in as: ' + xhr.responseText);
         };
-        xhr.send('idtoken=' + id_token);
+      //  xhr.send('idtoken=' + id_token);
+      xhr.send('accesstoken=' + access_token);
 
       };
 
