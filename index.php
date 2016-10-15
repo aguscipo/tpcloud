@@ -9,6 +9,7 @@
     <div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
     <div id="name"> </div>
     <div id="imagediv"> </div>
+    <div id="files_list"> </div>
     <div id="signOut"> </div>
     <script>
       function onSignIn(googleUser) {
@@ -30,7 +31,18 @@
         xhr.open('POST', 'http://tpcloud.com/prueba.php');
         xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
         xhr.onload = function() {
-          console.log('Signed in as: ' + xhr.responseText);
+          var namesArray = xhr.responseText.split(',');
+          var arrayLength = namesArray.length;
+          var table = $('<table></table>').addClass('foo');
+          for(i=0; i < arrayLength; i++){
+              var row = $('<tr></tr>').addClass('bar').text(namesArray[i]);
+              table.append(row);
+          }
+          table.appendTo('#files_list');
+
+
+
+        //  console.log('Signed in as: ' + xhr.responseText);
         };
       //  xhr.send('idtoken=' + id_token);
       xhr.send('accesstoken=' + access_token);
