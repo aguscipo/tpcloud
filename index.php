@@ -9,6 +9,7 @@
     <div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
     <div id="name"> </div>
     <div id="imagediv"> </div>
+    <br> </br>
     <div id="files_list"> </div>
     <div id="signOut"> </div>
     <script>
@@ -16,7 +17,9 @@
         // Useful data for your client-side scripts:
         var profile = googleUser.getBasicProfile();
       //  document.getElementById("name").innerText = "Bienvenido " + profile.getName();
-        $('#name').text("Bienvenido " + profile.getName());
+        var title_name =  $('<h1>Bienvenido '+ profile.getName() + '</h1>');
+        $('#name').append(title_name);
+        //$('#name').text("Bienvenido " + profile.getName());
         var img = $('<img id="dynamic">'); //Equivalent: $(document.createElement('img'))
         img.attr('src', profile.getImageUrl());
         img.appendTo('#imagediv');
@@ -34,6 +37,8 @@
           var namesArray = xhr.responseText.split(',');
           var arrayLength = namesArray.length;
           var table = $('<table></table>').addClass('foo');
+          var title =  $('<h2> Mis archivos en Google Drive </h2>');
+          table.append(title);
           for(i=0; i < arrayLength; i++){
               var row = $('<tr></tr>').addClass('bar').text(namesArray[i]);
               table.append(row);
