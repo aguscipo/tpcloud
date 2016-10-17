@@ -10,16 +10,14 @@
     <div id="name"> </div>
     <div id="imagediv"> </div>
     <br> </br>
-    <div id="files_list"> </div>
+    <div id="form"> </div>
     <div id="signOut"> </div>
+
     <script>
       function onSignIn(googleUser) {
-        // Useful data for your client-side scripts:
         var profile = googleUser.getBasicProfile();
-      //  document.getElementById("name").innerText = "Bienvenido " + profile.getName();
         var title_name =  $('<h1>Bienvenido '+ profile.getName() + '</h1>');
         $('#name').append(title_name);
-        //$('#name').text("Bienvenido " + profile.getName());
         var img = $('<img id="dynamic">'); //Equivalent: $(document.createElement('img'))
         img.attr('src', profile.getImageUrl());
         img.appendTo('#imagediv');
@@ -27,37 +25,16 @@
         var link =$('<a href="#" onclick="signOut();">Sign out</a>');
         link.appendTo('#signOut');
         var access_token = googleUser.getAuthResponse().access_token;
-        console.log(access_token);
-      //  var id_token = googleUser.getAuthResponse().id_token;
-      //  console.log("ID TOKEN " + id_token);
-        var xhr = new XMLHttpRequest();
-        //    xhr.open('POST', 'http://tpcloud.com/prueba.php');
-        xhr.open('POST', 'https://powerful-escarpment-50680.herokuapp.com/prueba.php');
-        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-        xhr.onload = function() {
-          var namesArray = xhr.responseText.split(',');
-          var arrayLength = namesArray.length;
-          var table = $('<table></table>').addClass('foo');
-          var title =  $('<h2> Mis archivos en Google Drive </h2>');
-          table.append(title);
-          for(i=0; i < arrayLength; i++){
-              var row = $('<tr></tr>').addClass('bar').text(namesArray[i]);
-              table.append(row);
-          }
-          table.appendTo('#files_list');
-
-
-
-        //  console.log('Signed in as: ' + xhr.responseText);
-        };
-      //  xhr.send('idtoken=' + id_token);
-      xhr.send('accesstoken=' + access_token);
-
+        var form = $('<form method="post" action="list_files.php">' +
+                        '<input type="hidden" name="access_token" value='+ access_token +'>' +
+                        '<input type="submit" value="Ver Mis Archivos de Google Drive">'+
+                      '</form>'
+                    );
+        $('#form').append(form);
       };
 
     </script>
     <script>
-
           function signOut() {
             var auth2 = gapi.auth2.getAuthInstance();
             var logueado= auth2.isSignedIn.get();

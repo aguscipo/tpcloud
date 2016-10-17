@@ -15,7 +15,7 @@ if (isset($access_token)){
   $drive_service = new Google_Service_Drive($client);
   $files_list = $drive_service->files->listFiles(array())->getFiles();
   foreach ($files_list as $file) {
-    echo($file->getName());
+    echo($file->getId());
     echo(",");
   }
 } else {
