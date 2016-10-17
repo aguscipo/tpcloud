@@ -31,9 +31,9 @@
       //  var id_token = googleUser.getAuthResponse().id_token;
       //  console.log("ID TOKEN " + id_token);
         var xhr = new XMLHttpRequest();
-        xhr.open('POST', 'http://tpcloud.com/prueba.php');
+        //    xhr.open('POST', 'http://tpcloud.com/prueba.php');
+        xhr.open('POST', 'https://powerful-escarpment-50680.herokuapp.com/prueba.php');
         xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-        xhr.statusText.indexOf('nsresult: "0x805e0006 (<unknown>)"') > -1;
         xhr.onload = function() {
           var namesArray = xhr.responseText.split(',');
           var arrayLength = namesArray.length;
