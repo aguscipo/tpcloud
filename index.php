@@ -52,6 +52,8 @@
 
         $('#form_list').append(form_list);
         $('#form_create').append(form_create);
+        location.reload();
+
       };
 
     </script>

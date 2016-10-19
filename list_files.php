@@ -8,10 +8,11 @@ if (isset($access_token)){
   $client->setAccessToken($access_token);
   $drive_service = new Google_Service_Drive($client);
   $files_list = $drive_service->files->listFiles(array())->getFiles(); ?>
+
   <table id='files-table'>
     <tr>
-      <td> Nombre del archivo </td>
-      <td> Compartir </td>
+      <td> <b>Nombre del archivo</b> </td>
+      <td> <b>Compartir</b> </td>
     </tr>
     <?php foreach ($files_list as $file) { ?>
       <tr>
