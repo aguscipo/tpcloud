@@ -18,9 +18,8 @@ if (isset($access_token)){
         <td> <a href="https://docs.google.com/document/d/<?php echo($file->getId());?>/export?format=doc"> <?php echo($file->getName()); ?> </a> </td>
         <td>
           <form method="post" action="share_file.php">
-            <input type="hidden" name="access_token" value="<?php// echo($access_token) ?>">
+            <input type="hidden" name="access_token" value="<?php echo($access_token) ?>">
             <input type="hidden" name="file_id" value="<?php echo($file->getId()); ?>">
-            Email <input type="email" name="email">
             <input value="Compartir archivo" type="submit">
           </form>
         </td>

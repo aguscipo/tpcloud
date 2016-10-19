@@ -1,43 +1,21 @@
-<?php
-require_once __DIR__.'/vendor/autoload.php';
-$client = new Google_Client();
-$client->setAuthConfig('client_secrets.json');
-$access_token = $_POST['access_token'];
-if (isset($access_token)){
-  $client->setAccessToken($access_token);
-  $driveService = new Google_Service_Drive($client);
-  $fileId = $_POST['file_id'];
-  $driveService->getClient()->setUseBatch(true);
-  try {
-    $batch = $driveService->createBatch();
-    $userPermission = new Google_Service_Drive_Permission(array(
-      'type' => 'user',
-      'role' => 'reader',
-      'emailAddress' => $_POST['email']
-    ));
-    $request = $driveService->permissions->create(
-      $fileId, $userPermission, array('fields' => 'id'));
-    $batch->add($request, 'user');
-    $domainPermission = new Google_Service_Drive_Permission(array(
-      'type' => 'domain',
-      'role' => 'reader',
-      'domain' => 'gmail.com'
-    ));
-    $request = $driveService->permissions->create(
-      $fileId, $domainPermission, array('fields' => 'id'));
-    $batch->add($request, 'domain');
-    $results = $batch->execute();
-
-    foreach ($results as $result) {
-      if ($result instanceof Google_Service_Exception) {
-        // Handle error
-        printf($result);
-      } else {
-        printf("Permission ID: %s\n", $result->id);
-      }
-    }
-  } finally {
-    $driveService->getClient()->setUseBatch(false);
-  }
-}
-?>
+<html lang="es">
+  <head>
+    <meta name="google-signin-scope" content="profile email">
+    <meta name="google-signin-client_id" content="1009844009027-er6g2ovrcmgknsarrvvv81lo1qudscht.apps.googleusercontent.com">
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script type="text/javascript">
+        init = function() {
+            s = new gapi.drive.share.ShareClient();
+            s.setOAuthToken( '<?php echo($_POST['access_token'])?>');
+            s.setItemIds(['<?php echo($_POST['file_id'])?>']);
+        }
+        window.onload = function() {
+            gapi.load('drive-share', init);
+        }
+    </script>
+  </head>
+  <body>
+    <button onclick="s.showSettingsDialog()"> Seleccionar Usuario Google</button>
+  </body>
+</html>

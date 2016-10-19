@@ -58,10 +58,7 @@
     <script>
           function signOut() {
             var auth2 = gapi.auth2.getAuthInstance();
-            var logueado= auth2.isSignedIn.get();
-            console.log("Deberia ser true " + logueado)
             auth2.signOut();
-            var logueado= auth2.isSignedIn.get();
             location.reload();
           }
   </script>
