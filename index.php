@@ -1,7 +1,7 @@
 <html lang="es">
   <head>
     <meta name="google-signin-scope" content="profile email">
-    <meta name="google-signin-client_id" content="1009844009027-85kivvsggdlcja37umpgige7djrvc4us.apps.googleusercontent.com">
+    <meta name="google-signin-client_id" content="1009844009027-er6g2ovrcmgknsarrvvv81lo1qudscht.apps.googleusercontent.com">
     <script src="https://apis.google.com/js/platform.js" async defer></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
   </head>
@@ -9,12 +9,24 @@
     <div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
     <div id="name"> </div>
     <div id="imagediv"> </div>
-    <br> </br>
-    <div id="form"> </div>
+    </br>
+    <div id="form_list"> </div>
+    <div id="form_create"> </div>
     <div id="signOut"> </div>
 
     <script>
       function onSignIn(googleUser) {
+        var options = new gapi.auth2.SigninOptionsBuilder(
+        {'scope': 'email https://www.googleapis.com/auth/drive https://www.googleapis.com/auth/drive.appfolder https://www.googleapis.com/auth/drive.file https://www.googleapis.com/auth/drive.install https://www.googleapis.com/auth/drive.metadata https://www.googleapis.com/auth/drive.scripts https://www.googleapis.com/auth/drive.photos.readonly'});
+
+        googleUser.grant(options).then(
+        function(success){
+          console.log(JSON.stringify({message: "success", value: success}));
+        },
+        function(fail){
+          alert(JSON.stringify({message: "fail", value: fail}));
+        });
+
         var profile = googleUser.getBasicProfile();
         var title_name =  $('<h1>Bienvenido '+ profile.getName() + '</h1>');
         $('#name').append(title_name);
@@ -25,12 +37,21 @@
         var link =$('<a href="#" onclick="signOut();">Sign out</a>');
         link.appendTo('#signOut');
         var access_token = googleUser.getAuthResponse().access_token;
-        var form = $('<form method="post" action="list_files.php">' +
-                        '<input type="hidden" name="access_token" value='+ access_token +'>' +
-                        '<input type="submit" value="Ver Mis Archivos de Google Drive">'+
-                      '</form>'
-                    );
-        $('#form').append(form);
+        var form_list = $('<form method="post" action="list_files.php">' +
+                            '<input type="hidden" name="access_token" value='+ access_token +'>' +
+                            '<input type="submit" value="Ver Mis Archivos de Google Drive">'+
+                          '</form>'
+                          );
+        var form_create = $('<form method="post" action="create_file.php">' +
+                              '<input type="hidden" name="access_token" value='+ access_token +'>' +
+                              '<input type="text" name="name">'+
+
+                              '<input type="submit" value="Crear archivo">'+
+                            '</form>'
+                            );
+
+        $('#form_list').append(form_list);
+        $('#form_create').append(form_create);
       };
 
     </script>
