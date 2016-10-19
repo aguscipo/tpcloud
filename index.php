@@ -17,7 +17,7 @@
     <script>
       function onSignIn(googleUser) {
         var options = new gapi.auth2.SigninOptionsBuilder(
-        {'scope': 'email https://www.googleapis.com/auth/drive https://www.googleapis.com/auth/drive.appfolder https://www.googleapis.com/auth/drive.file https://www.googleapis.com/auth/drive.install https://www.googleapis.com/auth/drive.metadata https://www.googleapis.com/auth/drive.scripts https://www.googleapis.com/auth/drive.photos.readonly'});
+        {'scope': 'email https://www.googleapis.com/auth/drive https://www.googleapis.com/auth/drive.appfolder https://www.googleapis.com/auth/drive.file'});
 
         googleUser.grant(options).then(
         function(success){

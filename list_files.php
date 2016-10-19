@@ -15,7 +15,7 @@ if (isset($access_token)){
     </tr>
     <?php foreach ($files_list as $file) { ?>
       <tr>
-        <td> <a href="https://docs.google.com/document/d/<?php echo($file->getId());?>/export?format=pdf"> <?php echo($file->getName()); ?> </a> </td>
+        <td> <a href="https://docs.google.com/document/d/<?php echo($file->getId());?>/export?format=doc"> <?php echo($file->getName()); ?> </a> </td>
         <td>
           <form method="post" action="share_file.php">
             <input type="hidden" name="access_token" value="<?php// echo($access_token) ?>">
