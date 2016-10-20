@@ -16,7 +16,7 @@
     </script>
   </head>
   <body>
-    <a href="list_files.php" >Volver</a>
+    <a href="google_drive_admin.php" >Volver</a>
     <br></br>
     <button onclick="s.showSettingsDialog()"> Seleccionar Usuario Google</button>
   </body>
