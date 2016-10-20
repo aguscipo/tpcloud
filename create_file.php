@@ -14,7 +14,9 @@ $file = $driveService->files->create($fileMetadata, array(
   'data' => $content,
   'mimeType' => 'text/plain',
   'uploadType' => 'multipart',
-  'fields' => 'id'));
+  'fields' => 'id'));?>
+  <a href="google_drive_admin.php" >Volver</a>
+  <br></br>
+<?php
 printf("Se creo correctamente el archivo: %s\n", $_POST['name']);
-}
-?>
+}?>

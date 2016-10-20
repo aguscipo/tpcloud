@@ -11,7 +11,6 @@
     <div id="imagediv"> </div>
     </br>
     <div id="form_list"> </div>
-    <div id="form_create"> </div>
     <div id="signOut"> </div>
 
     <script>
@@ -26,7 +25,6 @@
         function(fail){
           alert(JSON.stringify({message: "fail", value: fail}));
         });
-
         var profile = googleUser.getBasicProfile();
         var title_name =  $('<h1>Bienvenido '+ profile.getName() + '</h1>');
         $('#name').append(title_name);
@@ -37,22 +35,12 @@
         var link =$('<a href="#" onclick="signOut();">Sign out</a>');
         link.appendTo('#signOut');
         var access_token = googleUser.getAuthResponse().access_token;
-        var form_list = $('<form method="post" action="list_files.php">' +
+        var form_list = $('<form method="post" action="google_drive_admin.php">' +
                             '<input type="hidden" name="access_token" value='+ access_token +'>' +
-                            '<input type="submit" value="Ver Mis Archivos de Google Drive">'+
+                            '<input type="submit" value="Administrar mis archivos de Google Drive">'+
                           '</form>'
                           );
-        var form_create = $('<form method="post" action="create_file.php">' +
-                              '<input type="hidden" name="access_token" value='+ access_token +'>' +
-                              '<input type="text" name="name">'+
-
-                              '<input type="submit" value="Crear archivo">'+
-                            '</form>'
-                            );
-
         $('#form_list').append(form_list);
-        $('#form_create').append(form_create);
-        location.reload();
 
       };
 
@@ -67,4 +55,5 @@
 
 
   </body>
+
 </html>
