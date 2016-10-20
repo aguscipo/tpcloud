@@ -16,6 +16,8 @@
     </script>
   </head>
   <body>
+    <a href="list_files.php" >Volver</a>
+    <br></br>
     <button onclick="s.showSettingsDialog()"> Seleccionar Usuario Google</button>
   </body>
 </html>
